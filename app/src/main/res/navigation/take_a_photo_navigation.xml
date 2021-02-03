@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/take_a_photo_navigation"
+    app:startDestination="@id/takeAPhotoFragment">
+
+    <fragment
+        android:id="@+id/cropFragment"
+        android:name="com.example.logx.view.takeaphoto.CropFragment"
+        android:label="fragment_crop"
+        tools:layout="@layout/fragment_crop" >
+        <action
+            android:id="@+id/action_cropFragment_to_takeAPhotoResultFragment"
+            app:destination="@id/takeAPhotoResultFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/takeAPhotoFragment"
+        android:name="com.example.logx.view.takeaphoto.TakeAPhotoFragment"
+        android:label="TakeAPhotoFragment" >
+        <action
+            android:id="@+id/action_takeAPhotoFragment_to_cropFragment"
+            app:destination="@id/cropFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/takeAPhotoResultFragment"
+        android:name="com.example.logx.view.takeaphoto.TakeAPhotoResultFragment"
+        android:label="fragment_take_a_photo_result"
+        tools:layout="@layout/fragment_take_a_photo_result" />
+</navigation>

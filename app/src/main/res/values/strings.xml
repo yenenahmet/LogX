@@ -1,0 +1,20 @@
+<resources>
+    <string name="app_name">LogX</string>
+    <string name="action_settings">Settings</string>
+
+
+    <string name="LOADING_TYPE">Yükleme Tipi</string>
+    <string name="LOAD_TYPE">Yük Tipi</string>
+    <string name="LOADING_QUANTITY">Yükleme Adedi</string>
+    <string name="WEIGHT_OF_LOADS">Yüklerin Ağırlığı</string>
+    <string name="LOADING_TIME">Yükleme Saati</string>
+    <string name="CUSTOMS_EXIT">Gümrük Çıkışı</string>
+    <string name="VOLUME">Hacim (m3)</string>
+    <string name="TEXT_YOU_ARE_IN_THE_SHIPPING_ADDRESS_LIMITS">Yükleme adresi sınırlarındasın</string>
+    <string name="TEXT_LOADING_FLOW">YÜKLEME AKIŞI - 1 / 4</string>
+    <string name="TEXT_I_CAME_TO_LOADING_POINT">YÜKLEME NOKTASINA GELDİM</string>
+    <string name="LOADING_PICTURE">Yükleme Resmi</string>
+    <string name="SHOOT_AGAIN">Yeniden Çek</string>
+    <string name="SEND">Gönder</string>
+
+</resources>

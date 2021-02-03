@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.takeaphoto.CropFragment">
+
+    <RelativeLayout
+        android:id="@+id/top_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/bar_gray">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/imgBack"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_margin="10dp"
+            android:padding="5dp"
+            android:src="@drawable/ic_arrow"
+            android:theme="@style/Theme.LogX.WhiteRipple"
+            android:tint="@color/bottom_bar_bg" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/imgOk"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_alignParentEnd="true"
+            android:layout_margin="10dp"
+            android:padding="5dp"
+            android:src="@drawable/ic_tick"
+            android:theme="@style/Theme.LogX.WhiteRipple"
+            android:tint="@color/bottom_bar_bg" />
+
+
+    </RelativeLayout>
+
+
+    <com.takusemba.cropme.CropLayout
+        android:id="@+id/crop_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/top_bar"
+        app:cropme_background_alpha="80%"
+        app:cropme_frame_height_percent="80%"
+        app:cropme_frame_width_percent="80%"
+        app:cropme_max_scale="2.0"
+        app:cropme_overlay_shape="rectangle"
+        app:cropme_with_border="true" />
+
+
+</RelativeLayout>
