@@ -14,9 +14,14 @@ import androidx.exifinterface.media.ExifInterface
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.logx.R
+import com.example.logx.view.MainActivity
 import com.takusemba.cropme.CropLayout
 import com.takusemba.cropme.OnCropListener
 import com.yenen.ahmet.basecorelibrary.base.extension.showToast
+import java.io.File
+import java.io.FileOutputStream
+import java.text.SimpleDateFormat
+import java.util.*
 
 
 class CropFragment : Fragment() {
@@ -90,7 +95,17 @@ class CropFragment : Fragment() {
             val bundle = Bundle().apply {
                 putParcelable("BITMAP",bitmap)
             }
-            findNavController().navigate(R.id.action_cropFragment_to_takeAPhotoResultFragment,bundle)
+            try{
+                FileOutputStream(MainActivity.tempFile).use {
+                    bitmap.compress(Bitmap.CompressFormat.PNG, 100, it)
+                    it.flush()
+                }
+            }catch (ex:Exception){
+                showToast("Bitmap Hata Olustu!!")
+            }
+
+
+            findNavController().navigate(R.id.action_cropFragment_to_takeAPhotoResultFragment)
         }
 
         override fun onFailure(e: Exception) {
@@ -102,5 +117,7 @@ class CropFragment : Fragment() {
         super.onDetach()
         cropView.removeOnCropListener(cropListener)
     }
+
+
 
 }

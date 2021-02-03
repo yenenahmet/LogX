@@ -1,5 +1,6 @@
 package com.example.logx.view.takeaphoto
 
+import android.app.Activity
 import android.graphics.Bitmap
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -11,8 +12,11 @@ import androidx.appcompat.widget.AppCompatImageView
 import androidx.cardview.widget.CardView
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.example.logx.R
+import com.example.logx.view.MainActivity
 import com.yenen.ahmet.basecorelibrary.base.extension.showToast
+import java.io.File
 
 class TakeAPhotoResultFragment : Fragment() {
 
@@ -27,11 +31,12 @@ class TakeAPhotoResultFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val llSend = view.findViewById<LinearLayout>(R.id.llSend)
         llSend.setOnClickListener {
-            showToast("Resim Gönderildi...")
+            activity?.setResult(Activity.RESULT_OK)
             activity?.finish()
         }
         val cvClose = view.findViewById<CardView>(R.id.cvClose)
         cvClose.setOnClickListener {
+            activity?.setResult(Activity.RESULT_CANCELED)
             activity?.finish()
         }
         val llRefresh = view.findViewById<LinearLayout>(R.id.llRefresh)
@@ -40,9 +45,15 @@ class TakeAPhotoResultFragment : Fragment() {
             findNavController().popBackStack()
         }
         val img = view.findViewById<AppCompatImageView>(R.id.img)
-        val bitmap = arguments?.getParcelable<Bitmap>("BITMAP")
-        Glide.with(this).load(bitmap).into(img)
+        //val bitmap = arguments?.getParcelable<Bitmap>("BITMAP")
+        Glide.with(this).load(MainActivity.tempFile)
+            .diskCacheStrategy(DiskCacheStrategy.NONE)
+            .skipMemoryCache(true)
+            .into(img)
     }
+
+
+
 
 
 }

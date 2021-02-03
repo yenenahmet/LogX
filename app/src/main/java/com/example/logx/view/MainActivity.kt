@@ -1,10 +1,13 @@
 package com.example.logx.view
 
 import android.Manifest
+import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.Location
 import android.os.Bundle
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.example.logx.R
 import com.example.logx.custom.CustomGoogleMapFragment
 import com.example.logx.databinding.ActivityMainBinding
@@ -20,17 +23,24 @@ import com.yenen.ahmet.basecorelibrary.base.extension.showToast
 import com.yenen.ahmet.basecorelibrary.base.ui.BaseActivity
 import com.yenen.ahmet.location_service.LocationListener
 import com.yenen.ahmet.location_service.LocationService
+import java.io.File
 
 class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>(
     MainViewModel::class.java,
     R.layout.activity_main
 ), OnMapReadyCallback {
 
+    private val TAKE_A_PHOTO_RESULT = 88
     private var map: GoogleMap? = null
     private lateinit var locationService:LocationService
 
+    companion object{
+        var tempFile :File? = null
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        tempFile = getTempFile()
         val childFragment =
             supportFragmentManager.findFragmentByTag("fragment_map") as? CustomGoogleMapFragment
                 ?: return
@@ -68,7 +78,8 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>(
             startActivity(ImageActivity::class.java)
         }
         binding.btnICame.setOnClickListener {
-            startActivity(TakeAPhotoActivity::class.java)
+            val nt = Intent(this,TakeAPhotoActivity::class.java)
+            startActivityForResult(nt,TAKE_A_PHOTO_RESULT)
         }
 
     }
@@ -101,6 +112,28 @@ class MainActivity : BaseActivity<MainViewModel, ActivityMainBinding>(
         if(requestCode == 11){
             locationService.startLocation()
         }
+        if(requestCode == TAKE_A_PHOTO_RESULT && resultCode == Activity.RESULT_OK){
+            showToast("Resim değitirildi")
+            Glide.with(this).load(tempFile)
+                .diskCacheStrategy(DiskCacheStrategy.NONE)
+                .skipMemoryCache(true)
+                .into(binding.imgResult)
+        }
+    }
+
+
+    private fun getOutputDirectory(): File {
+        val mediaDir = externalMediaDirs.firstOrNull()?.let {
+            File(it, resources.getString(R.string.app_name)).apply { mkdirs() }
+        }
+        return if (mediaDir != null && mediaDir.exists())
+            mediaDir else filesDir
+    }
+
+    private fun getTempFile(): File {
+        return File(
+            getOutputDirectory(), "crop_temp.jpg"
+        )
     }
 
 
