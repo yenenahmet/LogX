@@ -332,7 +332,8 @@
                                 android:textColor="@color/edit_title_color"
                                 android:textSize="13sp" />
 
-                            <Spinner
+                            <androidx.appcompat.widget.AppCompatSpinner
+                                app:setSpinnerAdapter="@{viewModel.loadTypeSpinnerAdapter}"
                                 android:layout_width="match_parent"
                                 android:layout_height="30dp"
                                 android:layout_margin="5dp" />
@@ -463,7 +464,8 @@
                                 android:textColor="@color/edit_title_color"
                                 android:textSize="13sp" />
 
-                            <Spinner
+                            <androidx.appcompat.widget.AppCompatSpinner
+                                app:setSpinnerAdapter="@{viewModel.loadingTypeSpinnerAdapter}"
                                 android:layout_width="match_parent"
                                 android:layout_height="30dp"
                                 android:layout_margin="5dp" />
